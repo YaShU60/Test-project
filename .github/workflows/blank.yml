@@ -1,8 +1,10 @@
 name: GitHub Actions Demo
-on: [push]
+on: [push] # Trigger on push events
+
 jobs:
   explore-github-actions:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest # Specify the runner
+
     steps:
       - run: echo "🎉 This job was triggered by a push event."
       - run: echo "🐧 Running on a GitHub-hosted server!"
