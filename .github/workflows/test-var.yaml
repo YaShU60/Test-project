@@ -1,0 +1,19 @@
+name: hello-World
+on:
+  push
+
+
+jobs:
+  hello-world-job:
+    runs-on: unbuntu-latest
+    steps:
+    - name: get the instance details
+      run: uname -a
+    - name: list the files
+      run: ls -ltrh
+    - name: free memory available
+      run: free -m
+    - name: List the running java processes
+      run: ps -ef | grep java
+    - name: disk utilization
+      run: df -h
