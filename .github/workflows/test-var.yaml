@@ -17,5 +17,5 @@ jobs:
       run: ps -ef | grep java
     - name: disk utilization
       run: df -h
-    - name: metadata info
-      run: ec2-metadata -i
+    - name: cpu data
+      run: top
