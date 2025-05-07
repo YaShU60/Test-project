@@ -1,16 +1,43 @@
-name: CI
-on: [push, pull_request]
+name: Linux Commands Example
+
+on:
+  push:
+    branches:
+      - main
+
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  run-linux-commands:
+    runs-on: ubuntu-latest  # Use Ubuntu as the runner
+    
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '14'
-      - name: Install dependencies
-        run: npm install
-      - name: Run tests
-        run: npm test
+        
+      - name: Create Project Directory
+        run: |
+          mkdir my_project
+          cd my_project
+          touch file1.txt file2.txt
+      
+      - name: Write to Files
+        run: |
+          echo "Hello, this is file 1" > my_project/file1.txt
+          echo "Hello, this is file 2" > my_project/file2.txt
+      
+      - name: List Files
+        run: |
+          echo "Listing files in my_project:"
+          ls -l my_project
+      
+      - name: Display File Contents
+        run: |
+          echo "Contents of file1.txt:"
+          cat my_project/file1.txt
+          echo ""
+          echo "Contents of file2.txt:"
+          cat my_project/file2.txt
+      
+      - name: Check Disk Space
+        run: |
+          echo "Checking disk space:"
+          df -h
