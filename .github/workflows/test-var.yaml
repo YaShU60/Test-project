@@ -1,4 +1,4 @@
-name: Linux Commands Example
+name: Extended Linux Commands Example
 
 on:
   push:
@@ -8,36 +8,52 @@ on:
 jobs:
   run-linux-commands:
     runs-on: ubuntu-latest  # Use Ubuntu as the runner
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-        
+
       - name: Create Project Directory
         run: |
-          mkdir my_project
+          mkdir -p my_project
           cd my_project
-          touch file1.txt file2.txt
-      
-      - name: Write to Files
+          mkdir src tests
+          touch src/app.js tests/test_app.js
+
+      - name: Write Example Code
         run: |
-          echo "Hello, this is file 1" > my_project/file1.txt
-          echo "Hello, this is file 2" > my_project/file2.txt
-      
-      - name: List Files
+          echo "console.log('Hello from app.js');" > my_project/src/app.js
+          echo "console.log('Testing app...');" > my_project/tests/test_app.js
+
+      - name: Install Dependencies
         run: |
-          echo "Listing files in my_project:"
-          ls -l my_project
-      
-      - name: Display File Contents
+          echo "Installing dependencies..."
+          touch my_project/package.json
+          echo "{}" > my_project/package.json # Creates a dummy package.json
+          cd my_project
+          # Simulate npm installation
+          echo "Installing packages..." # Normally you would run `npm install` here
+
+      - name: Run Tests
         run: |
-          echo "Contents of file1.txt:"
-          cat my_project/file1.txt
-          echo ""
-          echo "Contents of file2.txt:"
-          cat my_project/file2.txt
-      
-      - name: Check Disk Space
+          cd my_project/tests
+          # Simulate running tests
+          if [ -f test_app.js ]; then
+            cat test_app.js
+          else
+            echo "No test file found!"
+          fi
+
+      - name: Check File and Directory Permissions
         run: |
-          echo "Checking disk space:"
-          df -h
+          echo "Checking permissions for my_project:"
+          ls -ld my_project
+          echo "Checking permissions for src and tests folders:"
+          ls -ld my_project/src
+          ls -ld my_project/tests
+
+      - name: Clean Up
+        run: |
+          echo "Cleaning up..."
+          rm -rf my_project
+          echo "Cleanup complete."
