@@ -30,10 +30,13 @@ jobs:
     - name: Extract artifacts
       run: |
         mkdir -p artifacts
-        cp -R build/ artifacts/ # change this according to your build output
+        cp -R build/ artifacts/ # Change this according to your build output
+
+    - name: List artifacts
+      run: ls -R artifacts/  # Check if files are there
 
     - name: Upload artifacts
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: build-artifacts
         path: artifacts/
