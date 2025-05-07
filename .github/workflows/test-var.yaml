@@ -1,21 +1,16 @@
-name: hello-World
-on:
-  push
-
-
+name: CI
+on: [push, pull_request]
 jobs:
-  hello-world-job:
+  build:
     runs-on: ubuntu-latest
     steps:
-    - name: get the instance details
-      run: uname -a
-    - name: list the files
-      run: ls -ltrh
-    - name: free memory available
-      run: free -m
-    - name: List the running java processes
-      run: ps -ef | grep java
-    - name: disk utilization
-      run: df -h
-    - name: cpu data
-      run: top
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - name: Install dependencies
+        run: npm install
+      - name: Run tests
+        run: npm test
